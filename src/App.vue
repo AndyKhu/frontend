@@ -1,28 +1,25 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <router-view></router-view>
+    <v-snackbar
+      v-model="message.status"
+      :timeout="message.timeout"
+      :color="message.type"
+    >{{message.text}}</v-snackbar>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  data: () => ({
+  }),
+  computed: {
+    message: {
+      get() {return this.$store.state.message},
+      set(value) {return this.$store.commit('message',value)}
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
