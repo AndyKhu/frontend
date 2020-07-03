@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/login.vue'
 import Main from '../views/main.vue'
-import TandaTerima from '../views/tandaterima.vue'
+import TandaTerima from '../views/tandaterima/tandaterima.vue'
 
 Vue.use(VueRouter)
 
@@ -24,11 +24,11 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: 'tandaterima'
+        redirect: 'Tanda Terima'
       },
       {
         path: 'tandaterima',
-        name: 'tandaterima',
+        name: 'Tanda Terima',
         component: TandaTerima
       }
     ]

@@ -1,14 +1,17 @@
 <template>
   <v-app>
     <!-- SIDEBAR -->
-    <v-navigation-drawer dark app color="#181f47" :mini-variant="mini">
-      <v-list-item style="height:48px;">
+    <v-navigation-drawer dark app color="sidebarcolor" :mini-variant="mini">
+      <v-list-item style="height:48px;background: #fff;border-right:1px solid #dbdbdb">
         <v-list-item-content v-if="!mini">
-          <v-list-item-title class="title">Application</v-list-item-title>
+          <v-list-item-title class="title">
+            <v-img max-height="30" max-width="30" class="mr-2" contain src="@/assets/wiljon.png"/>
+            Wiljon
+          </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-btn icon small @click="mini = !mini" :color=" mini? 'baretcolor_light': ''">
-            <v-icon small>{{mini?"fa-expand-arrows-alt":"fa-compress-arrows-alt"}}</v-icon>
+          <v-btn icon small @click="mini = !mini" color="baretcolor">
+            <v-icon>{{mini?"mdi-chevron-double-right":"mdi-chevron-double-left"}}</v-icon>
           </v-btn>
         </v-list-item-action>
       </v-list-item>
@@ -24,7 +27,7 @@
         </v-list-item>-->
         <v-list-item link class="active">
           <v-list-item-action>
-            <v-icon>mdi-robot</v-icon>
+            <v-icon small>mdi-robot</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Tanda Terima</v-list-item-title>
@@ -35,6 +38,10 @@
     <!-- END SIDEBAR -->
     <!-- TOP SIDEBAR -->
     <v-app-bar app dense color="white">
+      <div class="activemenu">
+        <v-icon small color="sidebarcolor" class="mr-2">mdi-robot</v-icon>
+        {{currentRouteName}}
+      </div>
       <v-spacer></v-spacer>
       <v-menu left bottom>
         <template v-slot:activator="{ on, attrs }">
@@ -45,7 +52,10 @@
 
         <v-list>
           <v-list-item link>
-            <v-list-item-title @click="logout">Sign Out</v-list-item-title>
+            <v-list-item-title @click="logout">
+              <v-icon dense class="mr-2">mdi-logout</v-icon>
+              Sign Out
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -62,13 +72,26 @@
   </v-app>
 </template>
 <style lang="scss" scoped>
-.active {
-  background: #0f1634;
-  border-left: 3px solid #ffd609;
+.title {
+  display: flex;
+  align-items: center;
+  color: var(--v-sidebarcolor-darken1);
 }
-.main-container{
-    background: #dbdbdb;
-    height:100%;
+.active {
+  background: var(--v-sidebarcolor-darken1);
+  border-left: 3px solid var(--v-baretcolorlight-base);
+}
+.main-container {
+  background: #dbdbdb;
+  height: 100%;
+}
+.activemenu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--v-sidebarcolor-base);
+  font-weight: 450;
+  padding: 0 5px;
 }
 </style>
 <script>
@@ -77,9 +100,14 @@ export default {
     mini: false
   }),
   methods: {
-      logout(){
-          this.$api.auth.logout()
-      }
+    logout() {
+      this.$api.auth.logout();
+    }
+  },
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
+    }
   }
 };
 </script>

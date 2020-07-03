@@ -7,7 +7,7 @@
           <img src="@/assets/bg.svg" />
         </div>
         <div class="login-content">
-          <v-form v-model="valid" @submit.prevent="submit">
+          <v-form v-model="valid" @submit.prevent="submit" ref="loginform">
             <img src="@/assets/avatar.svg" />
             <h2 class="title">Welcome</h2>
             <v-text-field
@@ -47,7 +47,27 @@ export default {
   }),
   methods: {
     submit() {
-      this.$api.auth.login(this.user);
+      if (this.valid) {
+        this.$api.auth
+          .login(this.user)
+          .then(() => {
+            this.message("Login Success", "success");
+          })
+          .catch(() => {
+            this.message("Username or Password Salah", "error");
+          });
+      }else{
+        this.$refs.loginform.validate()
+        this.message("Login Failed -> isi username dan password", "error")
+      }
+    },
+    message(msg, type) {
+      this.$store.commit("message", {
+        status: true,
+        text: msg,
+        timeout: 1000,
+        type: type
+      });
     }
   }
 };

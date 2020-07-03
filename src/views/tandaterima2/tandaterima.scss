@@ -1,0 +1,53 @@
+.v-tab {
+    background: #e2e2e2;
+    &--active {
+        background: #ffffff;
+    }
+}
+
+.item-container {
+    &::v-deep {
+        .v-data-table__checkbox i,
+        .v-data-table-header i {
+            font-size: 18px;
+            color: var(--v-baretcolor-base)
+        }
+        .v-data-table-header {
+            background-color: #f3f4fb;
+        }
+    }
+}
+
+.cst-textfield ::v-deep {
+    .v-input__slot {
+        padding-right: 0 !important;
+    }
+    .v-input__append-inner {
+        margin-top: 3px !important;
+    }
+}
+
+// .tttable::v-deep {
+//     .row-onprogress{
+//       background: #81c784  !important;
+//       &:hover{
+//         background: #66bb6a !important;
+//       }
+//     }
+//     .row-finish {
+//       background: #81c784  !important;
+//       &:hover{
+//         background: #66bb6a !important;
+//       }
+//     }
+//     .row-closed {
+//       background: #9e9e9e !important;
+//       color: #424242;
+//       &:hover{
+//         background: #757575 !important;
+//       }
+//       i {
+//         color: #424242 !important;
+//       }
+//     }
+//   }

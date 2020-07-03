@@ -18,6 +18,16 @@ export default ($axios) => {
         },
         deletett(value) {
             return $axios.post(`/tandaterima/delete`, value)
+        },
+        cetak(id) {
+            return $axios.get(`/report/tandaterima`,{
+                params:{id: id,type: "PDF"},
+                responseType: 'arraybuffer'
+            }).then(res => {
+                var file = new Blob([res.data], {type: 'application/pdf'});
+                const url = window.URL.createObjectURL(file);
+                window.open(url)
+            })
         }
     }
 }
